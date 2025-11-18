@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MIK-FLOURISH — Water & Drinks Depot</title>
+  <meta name="description" content="MIK-FLOURISH Water and Drinks Depot — Buy bottled water and drinks online" />
+  <style>
+    /* ====== Brand colors ====== */
+    :root{
+      --royal:#133b8a; /* deep royal blue */
+      --royal-2:#1b56b3; /* lighter royal */
+      --silver:#c9cfd6;
+      --accent:#f2f6fb;
+      --glass: rgba(255,255,255,0.08);
+      --card-shadow: 0 6px 18px rgba(19,59,138,0.12);
+      --radius:16px;
+      --max-width:1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    /* ====== Reset & Base ====== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,var(--accent),#ffffff);
+      color:#0b1a33;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:36px 18px;
+      display:flex;justify-content:center;
+    }
+
+    .site{width:100%;max-width:var(--max-width);}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+
+    /* ====== Logo / Nav ====== */
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--royal),var(--royal-2));
+      display:grid;place-items:center;color:var(--silver);font-weight:700;font-size:18px;box-shadow:var(--card-shadow);
+    }
+    .logo h1{font-size:18px;margin:0}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--royal);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a:hover{background:var(--glass)}
+
+    /* ====== Layout ====== */
+    .main{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}
+
+    /* ====== Hero ====== */
+    .hero{background:linear-gradient(135deg,rgba(27,86,179,0.06),rgba(19,59,138,0.03));border-radius:18px;padding:26px;display:flex;gap:20px;align-items:center;box-shadow:var(--card-shadow)}
+    .hero-left{flex:1}
+    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--royal),var(--royal-2));color:var(--silver);font-weight:700}
+    .hero h2{margin:10px 0 8px 0;font-size:26px;color:var(--royal)}
+    .hero p{margin:0;color:#334155}
+    .cta-row{margin-top:12px;display:flex;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg,var(--royal),var(--royal-2));color:white}
+    .btn-outline{background:white;border:1px solid var(--silver);color:var(--royal)}
+
+    .hero-right{width:260px;display:grid;place-items:center}
+    .hero-img{width:220px;height:220px;border-radius:16px;background:linear-gradient(135deg,var(--royal),var(--royal-2));display:flex;align-items:center;justify-content:center;color:var(--silver);font-weight:800;font-size:26px;box-shadow:0 14px 30px rgba(27,86,179,0.12);transform:rotate(-6deg)}
+
+    /* ====== Product grid ====== */
+    .catalog{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .product{background:white;border-radius:14px;padding:12px;box-shadow:0 8px 22px rgba(2,6,23,0.06);display:flex;flex-direction:column;gap:8px;transition:transform .18s ease,box-shadow .18s}
+    .product:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(19,59,138,0.12)}
+    .product img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .product h3{margin:0;font-size:16px;color:var(--royal)}
+    .price-row{display:flex;justify-content:space-between;align-items:center}
+    .price{font-weight:800;color:var(--royal-2)}
+    .add{background:linear-gradient(90deg,var(--royal),var(--royal-2));color:white;border:0;padding:8px 10px;border-radius:10px;cursor:pointer}
+
+    /* ====== Sidebar Cart ====== */
+    .cart{background:linear-gradient(180deg,white,var(--accent));border-radius:14px;padding:16px;position:sticky;top:36px;height:fit-content;box-shadow:var(--card-shadow)}
+    .cart h4{margin:0 0 8px 0}
+    .cart-list{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow:auto;padding-right:6px}
+    .cart-item{display:flex;gap:8px;align-items:center}
+    .cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px}
+    .cart-item .meta{flex:1}
+    .qty{display:inline-flex;align-items:center;border-radius:8px;overflow:hidden}
+    .qty button{background:transparent;border:1px solid var(--silver);padding:4px 8px;cursor:pointer}
+    .qty span{display:inline-block;padding:6px 12px;background:white}
+    .totals{border-top:1px dashed var(--silver);padding-top:12px;margin-top:12px}
+    .checkout{display:flex;flex-direction:column;gap:8px}
+
+    /* ====== Footer ====== */
+    footer{margin-top:22px;padding:18px;border-radius:12px;background:linear-gradient(90deg,var(--royal),var(--royal-2));color:var(--silver);display:flex;justify-content:space-between;align-items:center}
+
+    /* ====== Responsive ====== */
+    @media (max-width:980px){
+      .main{grid-template-columns:1fr}
+      .hero-right{display:none}
+      .catalog{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      .catalog{grid-template-columns:1fr}
+      nav{display:none}
+      header{gap:12px}
+    }
+
+    /* ====== Micro animations ====== */
+    .pulse{animation:pulse 2.6s infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+
+    /* tiny helper */
+    .muted{color:#64748b;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>
+      <div class="logo">
+        <div class="mark">MF</div>
+        <div>
+          <h1>MIK-FLOURISH</h1>
+          <div class="muted" style="font-size:12px">Water & Drinks Depot</div>
+        </div>
+      </div>
+
+     <nav>
+  <a href="index.html">Home</a>
+  <a href="#products">Products</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+    </header>
+
+    <main class="main">
+      <section>
+        <div class="hero" id="home">
+          <div class="hero-left">
+            <span class="kicker">Fresh • Trusted • Delivered</span>
+            <h2>Pure water & refreshing drinks — delivered fast</h2>
+            <p>MIK-FLOURISH supplies clean bottled water, juices and assorted beverages across town. Place orders online or on WhatsApp and we deliver to your door.</p>
+            <div class="cta-row">
+              <button class="btn btn-primary" id="shop-now">Browse Products</button>
+              <button class="btn btn-outline" id="whatsapp-order">Order via WhatsApp</button>
+            </div>
+
+            <div style="margin-top:14px" class="muted">Open hours: Mon–Sun • 7:00 AM – 9:00 PM</div>
+          </div>
+
+          <div class="hero-right">
+            <div class="hero-img pulse">MIK-FLOURISH</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;display:flex;justify-content:space-between;align-items:center">
+          <h3 id="products">Popular Picks</h3>
+          <div class="muted">Free delivery on orders above ₦5,000</div>
+        </div>
+
+        <div class="catalog" id="catalog"></div>
+
+      </section>
+
+      <aside class="cart" aria-labelledby="cart-title">
+        <h4 id="cart-title">Your Cart <span class="muted" id="cart-count">(0)</span></h4>
+        <div class="cart-list" id="cart-list"></div>
+
+        <div class="totals">
+          <div style="display:flex;justify-content:space-between"><div class="muted">Subtotal</div><div id="subtotal">₦0</div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-weight:700"><div>Total</div><div id="total">₦0</div></div>
+
+          <div class="checkout">
+            <button class="btn btn-primary" id="checkout">Checkout (WhatsApp)</button>
+            <button class="btn btn-outline" id="clear-cart">Clear Cart</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>
+        <div style="font-weight:700">MIK-FLOURISH Water & Drinks Depot</div>
+        <div class="muted">Delivering fresh water & drinks across your city</div>
+      </div>
+      <div style="text-align:right">
+        <div class="muted">Contact:</div>
+        <div style="font-weight:700">+234 9130383150</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  // ====== Product list for MIK-FLOURISH Water & Drinks Depot ======
+const PRODUCTS = [
+  { id: 'p1', name: 'Coca-Cola Bottles 💯', price: 500, image: './images/coke bottle.png' },
+  { id: 'p2', name: 'Pepsi Bottle 🍾', price: 500, image: './images/pepsi bottle.png' },
+  { id: 'p3', name: 'Aquafina Water', price: 300, image: './images/aquafina.jpg' },
+  { id: 'p4', name: 'Big Lacasera', price: 250, image: './images/lacasera2.jpg' },
+  { id: 'p5', name: 'Small Lacasera', price: 300, image: './images/small lacasera.jpg' },
+  { id: 'p6', name: 'Cway water', price: 250, image: './images/cway.jpg' },
+  { id: 'p7', name: 'bigi Water', price: 250, image: './images/bigi water.jpg' },
+  { id: 'p8', name: '50cl Coke', price: 350, image: './images/coke pet.png' },
+  { id: 'p22', name: 'Pepsi Pet', price: 500, image: './images/pepsi2.jpg' },
+  { id: 'p9', name: '50cl Fanta', price: 350, image: './images/fanta.jpg' },
+  { id: 'p10', name: '50cl Sprite', price: 350, image: './images/sprite.jpg' },
+  { id: 'p11', name: 'Predator', price: 600, image: './images/predator.jpg' },
+  { id: 'p12', name: 'Fearless 💫', price: 600, image: './images/fearless.jpg' },
+  { id: 'p13', name: 'Big Eva', price: 500, image: './images/big eva.jpg' },
+  { id: 'p14', name: 'Bigi Cola', price: 450, image: './images/Bigi pet.jpg' },
+  { id: 'p15', name: 'American Cola', price: 450, image: './images/American cola.jpg' },
+  { id: 'p16', name: 'Nutri Milk 🥛', price: 700, image: './images/nutri milk.jpg' },
+  { id: 'p17', name: 'Hi-Malt', price: 500, image: './images/Hi malt.jpg' },
+  { id: 'p18', name: 'Amstel Malt', price: 500, image: './images/Amstel malt.jpg' },
+  { id: 'p19', name: 'Guinness Malt', price: 550, image: './images/maltaguiness.jpg' },
+  { id: 'p20', name: 'Martina Pet', price: 500, image: './images/maltina pet.jpg' },
+  { id: 'p21', name: 'Seaview Dispensal', price: 250, image: './images/seaview.jpg' },
+  { id: 'p22', name: 'Nestle', price: 500, image: './images/nestle water2.jpg' },
+  { id: 'p22', name: 'Pepsi can', price: 500, image: './images/pepsi can.jpg' },
+
+];
+
+
+
+
+    // ====== Utilities ======
+    const formatN = n => '₦' + Number(n).toLocaleString();
+
+    // ====== Render product catalog ======
+    const catalog = document.getElementById('catalog');
+    function renderCatalog(){
+      catalog.innerHTML = '';
+      for(const p of PRODUCTS){
+        const el = document.createElement('div');el.className='product';
+        el.innerHTML = `
+          <img src="${p.image}" alt="${p.name}" loading="lazy"/>
+          <h3>${p.name}</h3>
+          <div class="muted">Fast delivery • Packed with care</div>
+          <div class="price-row">
+            <div class="price">${formatN(p.price)}</div>
+            <button class="add" data-id="${p.id}">Add</button>
+          </div>`;
+        catalog.appendChild(el);
+      }
+    }
+
+    // ====== Cart logic using localStorage ======
+    const CART_KEY = 'mik_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}'); // {productId: qty}
+
+    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); renderCart(); }
+
+    function addToCart(id, qty=1){ cart[id] = (cart[id]||0)+qty; saveCart(); }
+    function removeFromCart(id){ delete cart[id]; saveCart(); }
+    function setQty(id, qty){ if(qty<=0) removeFromCart(id); else {cart[id]=qty; saveCart();} }
+
+    function cartItems(){
+      return Object.keys(cart).map(id=>{
+        const product = PRODUCTS.find(p=>p.id===id);
+        return {id, product, qty:cart[id]};
+      });
+    }
+
+    function totals(){
+      const items = cartItems();
+      const subtotal = items.reduce((s,it)=>s + it.product.price*it.qty,0);
+      return {subtotal};
+    }
+
+    // ====== Render cart UI ======
+    const cartList = document.getElementById('cart-list');
+    const cartCount = document.getElementById('cart-count');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+
+    function renderCart(){
+      cartList.innerHTML='';
+      const items = cartItems();
+      cartCount.textContent = `(${items.length})`;
+      if(items.length===0){ cartList.innerHTML = '<div class="muted">Your cart is empty. Add drinks to start an order.</div>'; }
+
+      for(const it of items){
+        const div = document.createElement('div');div.className='cart-item';
+        div.innerHTML = `
+          <img src="${it.product.image}" alt="${it.product.name}"/>
+          <div class="meta">
+            <div style="font-weight:700">${it.product.name}</div>
+            <div class="muted">${formatN(it.product.price)} • ${formatN(it.product.price*it.qty)}</div>
+            <div style="margin-top:8px" class="qty">
+              <button class="dec" data-id="${it.id}">-</button>
+              <span>${it.qty}</span>
+              <button class="inc" data-id="${it.id}">+</button>
+            </div>
+          </div>
+          <div>
+            <button class="add" style="background:#ef4444">Remove</button>
+          </div>
+        `;
+        // hook buttons
+        div.querySelector('.dec').addEventListener('click',()=> setQty(it.id, it.qty-1));
+        div.querySelector('.inc').addEventListener('click',()=> setQty(it.id, it.qty+1));
+        div.querySelector('button[style]').addEventListener('click',()=> removeFromCart(it.id));
+
+        cartList.appendChild(div);
+      }
+
+      const sub = totals().subtotal;
+      subtotalEl.textContent = formatN(sub);
+      totalEl.textContent = formatN(sub);
+    }
+
+    // ====== Export order message for WhatsApp ======
+    function buildWhatsAppMessage(){
+      const items = cartItems();
+      if(items.length===0) return '';
+      let msg = `Order from MIK-FLOURISH%0A`;
+      msg += `Customer: [Your name here]%0A`;
+      msg += `Phone: [Your phone here]%0A`;
+      msg += `---%0A`;
+      for(const it of items){
+        msg += `${encodeURIComponent(it.product.name)} x ${it.qty} - ₦${it.product.price*it.qty}%0A`;
+      }
+      msg += `---%0A`;
+      msg += `Total: ₦${totals().subtotal}%0A`;
+      msg += `Delivery address: [enter address]%0A`;
+      msg += `Thank you!`;
+      return msg;
+    }
+
+    // ====== Event bindings ======
+    document.addEventListener('click', e=>{
+      const addB = e.target.closest('.add');
+      if(addB && addB.dataset.id){ addToCart(addB.dataset.id); }
+    });
+
+    document.getElementById('shop-now').addEventListener('click',()=>{
+      window.location.hash = '#products';
+      document.getElementById('catalog').scrollIntoView({behavior:'smooth'});
+    });
+
+    document.getElementById('whatsapp-order').addEventListener('click',()=>{
+      const msg = buildWhatsAppMessage();
+      const url = msg ? `https://wa.me/2349130383150?text=${msg}` : 'https://wa.me/2349130383150';
+      window.open(url,'_blank');
+    });
+
+    document.getElementById('checkout').addEventListener('click',()=>{
+      const msg = buildWhatsAppMessage();
+      if(!msg){ alert('Your cart is empty — add items first.'); return; }
+      window.open(`https://wa.me/2349130383150?text=${msg}`,'_blank');
+    });
+
+    document.getElementById('clear-cart').addEventListener('click',()=>{ if(confirm('Clear your cart?')){ cart={}; saveCart(); } });
+
+    // ====== Init ======
+    renderCatalog();
+    renderCart();
+
+    // ====== Quick customization helpers (console) ======
+    // Use these in browser console to quickly change product data, or to integrate payment:
+    // window.PRODUCTS = PRODUCTS; window.saveProducts = () => { /* persist to your server */ }
+
+    // ====== Notes for next steps ======
+    // 1) Replace the sample WhatsApp number with your business phone.
+    // 2) To integrate card payments, add Paystack or Flutterwave SDK in checkout flow and send 'totals().subtotal' to your backend.
+    // 3) Replace product images with your real bottles and update prices.
+
+  </script>
+</body>
+</html>
